@@ -1,14 +1,20 @@
+<?php
+
+    require_once 'process/conexao.php';
+
+?>
+
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" dir="ltr">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cadastrar-se no Divã</title>
-    <link rel="stylesheet" href="css/navbar.css" type="text/css">
-    <link rel="stylesheet" href="css/login.css" type="text/css">
+    <title>Encontrar Consultas</title>
+    <link rel="stylesheet" href="css/feed.css">
+    <link rel="stylesheet" href="css/navbar.css">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css">
     <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
-    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
 </head>
 <body id="body-pd">
         <header class="header" id="header">
@@ -22,7 +28,7 @@
         </header>
 
         <div class="l-navbar" id="nav-bar">
-        <nav class="nav">
+            <nav class="nav">
                 <div>
                     <a href="index.php" class="nav__logo">
                         <i class=''>D</i>
@@ -63,36 +69,42 @@
                 </a>
             </nav>
         </div>
-    <main>
-        <h1>Cadastrar conta</h1>
-        <div class="cad">
-            <a href="login.php">Já tem uma conta ainda então acesse!!!</a>
+
+        <?php
+        
+        $query = "SELECT nome, email FROM  psicologos";
+        $exec = mysqli_query($conexao, $query);
             
-        </div>
-        <div class="alter">
-            <span>Ou</span>
-        </div>
-        <form action="process/cadastrar.php" method="POST" enctype="multipart/form-data">
-            
-            <p><input type="text" name="nome" placeholder="Nome">
-            <input type="text" name="email" placeholder="E-mail"></p>
-            <p><input type="password" name="senha" placeholder="Senha">
-            <input type="text" name="nascimento" placeholder="Data de nascimento"></p>
-            <p><input type="text" name="rg" placeholder="RG">
-            <input type="text" name="cpf" placeholder="CPF"></p>
-            <p><input type="text" name="cep" placeholder="CEP">
-            <select name="op">
-                <option value="">Escolha uma opção</option>
-                <option value="paci" >Paciente</option>
-                <option value="profi">Psicológo</option>
-            </select></p>
-            <p><input type="submit" value="Cadastrar"></p>
-        </form>
-    </main>
-    <section class="images">
-       <img src="imag/doctor.svg" alt="">
-    </section>
+
+        ?>
+
+        <div class="main">
+        <ul class="cards">
+        <?php
+            while ($psic = mysqli_fetch_array($exec)){
+            echo '<li class="cards_item">
+                    <div class="card">
+                        <div class="card_image"><img src="imag/user.png"></div>
+                            <div class="card_content">';
+                        
+                            
+                                    echo "<h2 class='card_title'>$psic[nome]</h2>";
+                                    echo "<p class='card_text'>$psic[email]</p>";
+                                
+                            
+                                echo '<button class="infos">Infantil</button>
+                                 <button class="infos">Casal</button>
+                            <a href="marcar_consulta.php"><button class="btn card_btn">Marcar</button></a>
+                        </div>
+                </div>
+            </li>';
+            }?>
+
+        </ul>
+    </div>
+    
 
     <script src="js/navbar.js"></script>
 </body>
+ 
 </html>

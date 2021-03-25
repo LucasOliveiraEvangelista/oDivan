@@ -10,9 +10,21 @@
         $cep = $_POST['cep'];
         $_POST['op'];
 
-        if( $nome == ""){
+        $senha = sha1($senha);
+
+        if($nome == ""){
             echo "<script>
             alert('Ops! Campo nome vazio');
+            history.back();
+        </script>";
+        }else if(strlen($nome) > 80){
+            echo "<script>
+            alert('Ops! Nome muito grande');
+            history.back();
+        </script>";
+        }else if(strlen($email) > 60){
+            echo "<script>
+            alert('Ops! E-mail muito grande');
             history.back();
         </script>";
         }else if($email == ""){
@@ -25,6 +37,11 @@
             alert('Ops! Campo senha vazio');
             history.back();
         </script>";
+        }else if(strlen($nasc) > 10){
+            echo "<script>
+            alert('Ops! Data muito grande');
+            history.back();
+        </script>";
         }else if($nasc == ""){
             echo "<script>
             alert('Ops! Data de nascimento vazia');
@@ -33,6 +50,11 @@
         }else if($cep == ""){
             echo "<script>
             alert('Ops! CEP vazio');
+            history.back();
+        </script>";
+        }else if(strlen($cep) > 9){
+            echo "<script>
+            alert('Ops! Cep muito grande');
             history.back();
         </script>";
         }else if($rg == ""){
@@ -59,19 +81,19 @@
 
                 if($inserir == 1 ){
                     echo "<script>
-                    alert('Cadastrado com sucesso! Seja');
+                    alert('Cadastrado com sucesso! Seja bem-vindo');
                     location.href='../index.php';
                     </script>";
-                }else{
-                    echo "<script>
-                    alert('Faio aqui!');
-                    location.href='cadastrar.php';
-                    </script>";
-                }
+                    }else{
+                        echo "<script>
+                        alert('Faio aqui!');
+                        location.href='cadastrar.php';
+                        </script>";
+                    }
 
                 }else if($_POST['op'] == "profi"){
-                    $query= "INSERT INTO psicologos (nome, email, senha, nascimento, rg, cpf, cep) 
-                    VALUES ('$nome', '$email', '$senha', '$nasc', '$rg', '$cpf', '$cep')";
+                    $query= "INSERT INTO psicologos (nome, email, senha, nascimento, rg, cpf, cep, situacao) 
+                    VALUES ('$nome', '$email', '$senha', '$nasc', '$rg', '$cpf', '$cep', 0)";
 
                     $inserir = mysqli_query($conexao, $query);
                     if($inserir == 1 ){
@@ -79,8 +101,7 @@
                         alert('Cadastrado com sucesso!');
                         location.href='../index.php';
                         </script>";
-                    
-                
+
                         }else{
                             echo "<script>
                             alert('Faio aqui!');
@@ -91,6 +112,4 @@
                 }
             
             }
-        
-
 ?>

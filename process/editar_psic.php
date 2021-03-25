@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -5,8 +7,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Perfil</title>
-    <link rel="stylesheet" href="css/navbar.css">
-    <link rel="stylesheet" href="css/perfi.css">
+    <link rel="stylesheet" href="../css/navbar.css">
+    <link rel="stylesheet" href="../css/perfi.css">
     <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
 
     <script src="https://kit.fontawesome.com/b99e675b6e.js"></script>
@@ -19,7 +21,7 @@
             </div>
 
             <div class="header__img">
-                <img src="assets/img/perfil.jpg" alt="">
+                <img src="../imag/logo.png" alt="">
             </div>
         </header>
 
@@ -27,7 +29,7 @@
         <nav class="nav">
                 <div>
                     <a href="index.php" class="nav__logo">
-                        <i class=''>D</i>
+                    <img src="../imag/logo.png" width="30px" alt="">
                         <span class="nav__logo-name">Divã</span>
                     </a>
 
@@ -66,11 +68,26 @@
             </nav>
         </div>
 
+        <?php
+
+    require_once 'conexao.php';
+    
+
+
+            
+    
+    $query = "SELECT * FROM psicologos WHERE id_psicologo = ";
+    $listar = mysqli_query($conexao, $query);
+    while($dados = mysqli_fetch_array($listar)){
+        
+        echo '<tr>
+
+        <form action="altera_psic.php" method="POST">
         <div class="wrapper">
             <div class="left">
-                <img src="imag/user.png" 
+                <img src="../imag/user.png" 
                 alt="user" width="20vw">
-                <h4>Nome do usuario</h4>
+                <h4>$dados[nome]</h4>
                 <p>Psicologo ou paciente</p>
             </div>
             <div class="right">
@@ -79,58 +96,57 @@
                     <div class="info_data">
                         <div class="data">
                             <h4>Email</h4>
-                            <p>alex@gmail
-                                .com</p>
+                            <input type="text" name="email">
                         </div>
                         <div class="data">
                         <h4>Telefone</h4>
-                            <p>(11)99872-9161</p>
+                        <input type="text" name="telefone">
                     </div>
                     </div>
                     <div class="info_data">
                         <div class="data">
                             <h4>Formação</h4>
-                            <p>UnicSul 2012-2016</p>
+                            <input type="text" name="formacao">
                         </div>
                         <div class="data">
                         <h4>CRP</h4>
-                            <p>00/xxx123</p>
+                        <input type="text" name="crp">
                     </div>
                     </div>
                     <div class="info_data">
                         <div class="data">
                             <h4>Experiência</h4>
-                            <p>5 anos</p>
+                            <input type="text" name="experiencia">
                         </div>
                         <div class="data">
                         <h4>Valor da consulta</h4>
-                            <p>R$60/hr</p>
+                        <input type="text" name="valor">
                     </div>
                     </div>
                     <div class="info_data">
                         <div class="data">
                             <h4>Horários da consulta</h4>
-                            <p>11:00am - 20:00pm</p>
+                            <input type="text" name="hora">
                         </div>
                         <div class="data">
                         <h4>Dias de consulta</h4>
-                            <p>Seg à Sex</p>
+                        <input type="text" name="dia">
                     </div>
                     </div>
                     <div class="info_data">
                         <div class="data">
                             <h4>Endereço</h4>
-                            <p>Rua dos Bobos n°0</p>
+                            <input type="text" name="endereco">
                         </div>
                         <div class="data">
                         <h4>Biografia</h4>
-                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. 
-                                Velit eius error ducimus possimus nulla! Assumenda culpa 
-                                ex magnam maiores magni placeat labore laudantium accusamus, 
-                                rerum sapiente necessitatibus, nobis omnis voluptatibus?</p>
+                            <textarea name="bio"></textarea>
                     </div>
                     </div>
                 </div>
+        </form>';
+    }
+        ?>
             
                 <div class="projects">
                     <h3>ESPECIALIDADES</h3>
@@ -149,11 +165,12 @@
             
                 <div class="social-media">
                     <ul>
-                        <li><a href="process/editar_psic.php"><button>Editar</button></a></li>
+                        <li><a href="process/editar_psic.php"><button>Feito</button></a></li>
                     </ul>
                 </div>
             </div>
         </div>
-        <script src="js/navbar.js"></script>
+        <script src="../js/navbar.js"></script>
 </body>
 </html>
+
